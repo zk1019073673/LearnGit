@@ -36,16 +36,17 @@ export default class MyButton extends Component {
 
 const styles = StyleSheet.create({
     button:{
-        height:40,
-        width:100,
+        height:50,
+        width:120,
         justifyContent:'center'
     },
     buttonText:{
         textAlign:'center',
-        color:'white'
+        color:'white',
+        fontSize:18
     },
     container: {
-        margin:10,
+        margin:20,
         flexDirection:'row',
         justifyContent: 'center'
     }

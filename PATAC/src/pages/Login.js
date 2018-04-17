@@ -17,8 +17,8 @@ import MyButton from '../component/button';
  * 登录页面
  */
 const tabs = [
-    {title:'静态登入'},
-    {title:'动态登入'},
+    {title:<Text style={{fontSize:18}}>静态登入</Text>},
+    {title:<Text style={{fontSize:18}}>动态登入</Text>},
 ];
 
 export default class LoginScreen extends React.Component {
@@ -34,7 +34,9 @@ export default class LoginScreen extends React.Component {
                     <Text>泛亚汽车技术中心</Text> 
                 </View>
                 <View style={styles.LoginTabs}>
-                    <Tabs tabs={tabs} style={{margin:40}}>
+                    <Tabs tabs={tabs} 
+                    tabBarActiveTextColor='black' 
+                    tabBarInactiveTextColor='gray' >
                         <View>
                             <View style={styles.userNameLogin}>
                                 <TextInput placeholder='用户名称或电邮'
@@ -47,7 +49,7 @@ export default class LoginScreen extends React.Component {
                                 <TextInput placeholder='用户密码'
                                            placeholderTextColor={'#C0C0C0'}
                                            underlineColorAndroid="transparent"
-                                           style={{flex:5}}
+                                           style={{flex:5,fontSize:20}}
                                            secureTextEntry={true}
                                 >
                                 </TextInput>
@@ -74,10 +76,10 @@ export default class LoginScreen extends React.Component {
                                 <TextInput placeholder='动态密码'
                                            placeholderTextColor={'#C0C0C0'}
                                            underlineColorAndroid="transparent"
-                                           style={{flex:3}}
+                                           style={{flex:3,fontSize:20}}
                                 >
                                 </TextInput>
-                                <Button  size="small" style={styles.LoginTabsPhoneVerify}>发送动态短信</Button>
+                                <Button size="large" style={styles.LoginTabsPhoneVerify}>发送动态短信</Button>
                             </View>
                             <View>
                                 <MyButton text={"登入"} backcolor={"#333333"} press={() => this.props.navigation.navigate('Content')}>
@@ -95,12 +97,13 @@ const styles = StyleSheet.create({
     userNameLogin:{
         flexDirection:'row',
         backgroundColor:'#E6E6E6',
-        marginTop:30
+        marginTop:30,
     },
     userNameInput:{
         flex:5,
         borderBottomWidth:1,
-        borderBottomColor:'#BDBDBD'
+        borderBottomColor:'#BDBDBD',
+        fontSize:20
     },
     phoneLogin:{
         flexDirection:'row',
@@ -110,12 +113,13 @@ const styles = StyleSheet.create({
     phoneLoginInput:{
         flex:5,
         borderBottomWidth:1,
-        borderBottomColor:'#BDBDBD'
+        borderBottomColor:'#BDBDBD',
+        fontSize:20
     },
     LoginModal:{
         flex:1,
         flexDirection:'column',
-        height:50,
+        height:70,
         justifyContent: 'space-between'
     },
     LoginModalTitle:{
@@ -127,7 +131,7 @@ const styles = StyleSheet.create({
         marginTop:40
     },
     LoginModalLoginText:{
-        fontSize:px2dp(20),
+        fontSize:px2dp(28),
         fontWeight:'bold',
         paddingBottom:px2dp(7),
         paddingTop:px2dp(5)
@@ -135,10 +139,13 @@ const styles = StyleSheet.create({
     LoginTabs:{
         flex:1,
         backgroundColor:'#F4F4F4',
+        transform:[{scale:0.8}]
+        
     },
     LoginTabsUserNumber:{
         flexDirection:'row',
-        backgroundColor:'#E6E6E6'
+        backgroundColor:'#E6E6E6',
+        alignItems:'center',
     },
     LoginTabsUserNumberText:{
         flex:1,
@@ -150,17 +157,11 @@ const styles = StyleSheet.create({
         flex:1,
         paddingTop:px2dp(15),
         paddingLeft:px2dp(20),
-        fontWeight:'bold'
+        fontWeight:'bold',
     },
     LoginTabsPhoneVerify:{
         flex:2,
-        height:px2dp(35),
-        marginTop:px2dp(5)
+        height:px2dp(30),
+        marginRight:10
     },
-    LoginTabsPhoneVerifyMess:{
-        color:'#939393',
-        fontSize:px2dp(12),
-        paddingTop:px2dp(10),
-        paddingLeft:px2dp(100)
-    }
 });

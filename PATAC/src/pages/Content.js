@@ -13,36 +13,20 @@ import {
     Image } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import SearchDevicesScreen from './SearchDevices';
+import SearchChargingPie from './SearchChargingPie';
 import AccountInfo from './AccountInfo';
 
 /**
- * 设备群组页面,尚未实现导航栏按钮点击跳转
+ * 设备群组页面
  */
 let list = ['区域一：公用', '区域二：广德环境仓', '区域三：黑河','区域四：燃热区域'];  
-let list2 = ['设备一', '设备二'];
-
-/**
- * 自定义的导航栏
- */
-class LogoTitle extends React.Component {
-    render() {
-        return (
-            <View style={styles.titleText}>
-                <Text style={{marginLeft:70,fontSize:18,fontWeight:'bold'}}>设备群组列表</Text>
-                <TouchableOpacity onPress={() => {alert('无法跳转')}}>
-                    <Image style={{width:25,height:25,marginRight:15}} source={require('../images/personal-center.png')} ></Image>
-                </TouchableOpacity>
-            </View>
-        
-        );
-    }
-}
+let list2 = ['设备一:环境仓'];
 
 /**
  * 实际设备群组页面
  * @param {*} props 
  */
-export default class ContentScreen extends Component{
+export default class ContentScreen extends React.Component{
 
     constructor(props) { 
         super(props); 
@@ -51,8 +35,16 @@ export default class ContentScreen extends Component{
         }; 
     }
 
-    static navigationOptions = {
-        headerTitle:<LogoTitle/>
+    static navigationOptions = ({navigation}) => {
+        const params = navigation.state.params || {};
+        return {
+            headerRight: (
+                <TouchableOpacity onPress={() => navigation.navigate('AccountInfo')}>
+                    <Image style={{width:25,height:25,marginRight:15}} source={require('../images/personal-center.png')} ></Image>
+                </TouchableOpacity>
+            ),
+            headerTitle:'设备群组列表'
+          };
     }
 
     renderMenuList(list) { 
@@ -76,24 +68,33 @@ export default class ContentScreen extends Component{
                         <Icon color="gray" size={30} name={this.state.listExpand[i]?'angle-down':'angle-right'} />       
                     </View> 
                 </TouchableOpacity> 
-                    {this.state.listExpand[i]?this.renderSubMenuList(list2):null} 
+                    {this.state.listExpand[i]?this.renderSubItem():null}
             </View>
         ); 
     } 
-    renderSubMenuList(list2) { 
-        return list2.map((item, i) => this.renderSubItem(item, i)); 
-    } 
-    renderSubItem(item, i) { 
+    // renderSubMenuList(list2) { 
+    //     return list2.map((item, i) => this.renderSubItem(item, i)); 
+        
+    // } 
+    renderSubItem() { 
         return (
-            <View key={i}>
+            <View>
                 <TouchableOpacity activeOpacity={0.5} 
-                                  onPress = {() => {this.props.navigation.navigate('SearchDevices',{deviceName:item})}}>
+                                  onPress = {() => {this.props.navigation.navigate('SearchDevices',{deviceName:'设备一'})}}>
                     <View style={styles.itemContainer}>
-                        <Image style={{width:25,height:25,marginLeft:50}} source={require('../images/ChargingPie.png')}></Image>
-                        <Text style={{paddingRight:200}}>{item}</Text>
+                        <Image style={{width:25,height:25,marginLeft:50}} source={require('../images/Envir-Icon.png')}></Image>
+                        <Text style={{paddingRight:200}}>设备一：环境舱</Text>
                         <Icon color="gray" size={30} name='angle-right' />
                     </View>
-                </TouchableOpacity>           
+                </TouchableOpacity>
+                <TouchableOpacity activeOpacity={0.5} 
+                                  onPress = {() => {this.props.navigation.navigate('SearchChargingPie',{deviceName:'设备二'})}}>
+                    <View style={styles.itemContainer}>
+                        <Image style={{width:25,height:25,marginLeft:50}} source={require('../images/ChargingPie.png')}></Image>
+                        <Text style={{paddingRight:200}}>设备二：充电桩</Text>
+                        <Icon color="gray" size={30} name='angle-right' />
+                    </View>
+                </TouchableOpacity>
             </View> 
         ); 
     }
@@ -103,10 +104,7 @@ export default class ContentScreen extends Component{
             <View> 
                 <ScrollView contentContainerStyle={styles.contentContainer}> 
                     {this.renderMenuList(list)} 
-                </ScrollView> 
-                <TouchableOpacity style={styles.center} onPress={() => {this.props.navigation.navigate('AccountInfo')}}>
-                    <Image style={{width:50,height:50,marginRight:15}} source={require('../images/personal-center.png')} ></Image>
-                </TouchableOpacity> 
+                </ScrollView>
             </View> 
         ); 
     }

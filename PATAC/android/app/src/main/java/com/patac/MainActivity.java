@@ -1,7 +1,7 @@
 package com.patac;
-
+import android.os.Bundle;
 import com.facebook.react.ReactActivity;
-
+import com.mehcode.reactnative.splashscreen.SplashScreen;
 public class MainActivity extends ReactActivity {
 
     /**
@@ -11,5 +11,12 @@ public class MainActivity extends ReactActivity {
     @Override
     protected String getMainComponentName() {
         return "PATAC";
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState){
+        SplashScreen.show(this,getReactInstanceManager());
+
+        super.onCreate(savedInstanceState);
     }
 }

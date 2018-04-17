@@ -1,5 +1,5 @@
 /**
- * zhang.kai 2018/4/13
+ * zhang.kai 2018/4/17
  */
 import React, { Component } from 'react';
 import {
@@ -11,9 +11,9 @@ import MessageDetails from './MessageDetails';
 import FaultRecords from './FaultRecords';
 
 /**
- * 环境仓故障信息页面
+ * 充电桩故障信息页面
  */
-export default class FaultMessage extends Component {
+export default class ChargingPieFaultMessage extends Component {
 
     render(){
         return(

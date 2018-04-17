@@ -12,23 +12,7 @@ import {
     Switch,
     Image } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-
-/**
- * 自定义的账户信息页标题
- */
-class AccountTitle extends React.Component {
-
-    render() {
-        return (
-            <View style={styles.titleText}>
-                <Text style={{marginLeft:70,fontSize:18,fontWeight:'bold'}}>账户设定</Text>
-                <TouchableOpacity>
-                    <Text style={{marginRight:16,fontSize:20}}>编辑</Text>
-                </TouchableOpacity>
-            </View>
-        );
-    }
-}
+import AccountEdit from './AccountEdit';
 
 /**
  * 账户信息页内容
@@ -44,11 +28,21 @@ export default class AccountInfo extends React.Component{
         }; 
     }
 
-    static navigationOptions = {
-        headerTitle: <AccountTitle />,
-        headerStyle: {
-            backgroundColor: '#B3B3B3',
-        }
+    static navigationOptions = ({navigation}) => {
+        const params = navigation.state.params || {};
+        return {
+            headerRight: (
+                <TouchableOpacity onPress={() => navigation.navigate('AccountEdit')}>
+                    <Text style={{marginRight:15,fontSize:15,fontWeight:'bold'}}>编辑</Text>
+                </TouchableOpacity>
+            ),
+            headerLeft:(
+                <TouchableOpacity onPress = {() => {navigation.navigate('Content')}}>
+                    <Text style={{marginLeft:15,fontSize:15,fontWeight:'bold'}}>返回</Text>
+                </TouchableOpacity>
+            ),
+            headerTitle:'账户信息'
+        };
     };
 
     render(){
